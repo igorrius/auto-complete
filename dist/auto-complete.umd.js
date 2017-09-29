@@ -541,7 +541,7 @@ var NguiAutoCompleteDirective = (function () {
         this.matchFormatted = false;
         this.autoSelectFirstItem = false;
         this.openOnFocus = true;
-        this.blurAfterClick = true;
+        this.reFocusAfterSelect = true;
         this.zIndex = "1";
         this.isRtl = false;
         this.ngModelChange = new core_1.EventEmitter();
@@ -650,12 +650,22 @@ var NguiAutoCompleteDirective = (function () {
             (val !== _this.ngModel) && _this.ngModelChange.emit(val);
             _this.valueChanged.emit(val);
             _this.hideAutoCompleteDropdown();
-            setTimeout(function () { return _this.inputEl && _this.inputEl.focus(); });
+            setTimeout(function () {
+                if (_this.reFocusAfterSelect) {
+                    _this.inputEl.focus();
+                }
+                return _this.inputEl;
+            });
         };
         this.selectCustomValue = function (text) {
             _this.customSelected.emit(text);
             _this.hideAutoCompleteDropdown();
-            setTimeout(function () { return _this.inputEl && _this.inputEl.focus(); });
+            setTimeout(function () {
+                if (_this.reFocusAfterSelect) {
+                    _this.inputEl.focus();
+                }
+                return _this.inputEl;
+            });
         };
         this.enterNewText = function (value) {
             _this.renderValue(value);
@@ -693,9 +703,7 @@ var NguiAutoCompleteDirective = (function () {
                 _this.scheduledBlurHandler = null;
             }
         };
-        if (this.blurAfterClick) {
-            document.addEventListener('click', this.documentClickListener);
-        }
+        document.addEventListener('click', this.documentClickListener);
         // wrap this element with <div class="ngui-auto-complete">
         this.wrapperEl = document.createElement("div");
         this.wrapperEl.className = "ngui-auto-complete-wrapper";
@@ -873,9 +881,9 @@ var NguiAutoCompleteDirective = (function () {
         __metadata("design:type", Boolean)
     ], NguiAutoCompleteDirective.prototype, "openOnFocus", void 0);
     __decorate([
-        core_1.Input("blur-after-click"),
+        core_1.Input("re-focus-after-select"),
         __metadata("design:type", Boolean)
-    ], NguiAutoCompleteDirective.prototype, "blurAfterClick", void 0);
+    ], NguiAutoCompleteDirective.prototype, "reFocusAfterSelect", void 0);
     __decorate([
         core_1.Input(),
         __metadata("design:type", String)

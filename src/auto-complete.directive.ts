@@ -43,7 +43,7 @@ export class NguiAutoCompleteDirective implements OnInit, OnChanges {
   @Input("match-formatted") matchFormatted: boolean = false;
   @Input("auto-select-first-item") autoSelectFirstItem: boolean = false;
   @Input("open-on-focus") openOnFocus: boolean = true;
-  @Input("blur-after-click") blurAfterClick: boolean = true;
+  @Input("re-focus-after-select") reFocusAfterSelect: boolean = true;
 
   @Input() ngModel: String;
   @Input('formControlName') formControlName: string;
@@ -87,9 +87,7 @@ export class NguiAutoCompleteDirective implements OnInit, OnChanges {
       }
     };
 
-    if(this.blurAfterClick){
-      document.addEventListener('click', this.documentClickListener);
-    }
+    document.addEventListener('click', this.documentClickListener);
     // wrap this element with <div class="ngui-auto-complete">
     this.wrapperEl = document.createElement("div");
     this.wrapperEl.className = "ngui-auto-complete-wrapper";
@@ -311,13 +309,25 @@ export class NguiAutoCompleteDirective implements OnInit, OnChanges {
     (val !== this.ngModel) && this.ngModelChange.emit(val);
     this.valueChanged.emit(val);
     this.hideAutoCompleteDropdown();
-    setTimeout( () => this.inputEl && this.inputEl.focus());
+    setTimeout(() => {
+        if(this.reFocusAfterSelect){
+          this.inputEl.focus();
+        }
+
+        return this.inputEl;
+    });
   };
 
   selectCustomValue = (text: string) => {
     this.customSelected.emit(text);
     this.hideAutoCompleteDropdown();
-    setTimeout( () => this.inputEl && this.inputEl.focus());
+      setTimeout(() => {
+          if(this.reFocusAfterSelect){
+              this.inputEl.focus();
+          }
+
+          return this.inputEl;
+      });
   };
 
   enterNewText = (value: any) => {

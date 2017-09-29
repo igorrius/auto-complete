@@ -27,7 +27,7 @@ export declare class NguiAutoCompleteDirective implements OnInit, OnChanges {
     matchFormatted: boolean;
     autoSelectFirstItem: boolean;
     openOnFocus: boolean;
-    blurAfterClick: boolean;
+    reFocusAfterSelect: boolean;
     ngModel: String;
     formControlName: string;
     extFormControl: FormControl;
