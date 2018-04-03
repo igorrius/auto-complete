@@ -1,6 +1,6 @@
-import { Injectable, Optional } from "@angular/core";
-import { Http, RequestOptionsArgs, Response } from "@angular/http";
-import { Observable } from "rxjs";
+import {Injectable, Optional} from "@angular/core";
+import {Http, Response} from "@angular/http";
+import {Observable} from "rxjs";
 import "rxjs/add/operator/map";
 
 /**
@@ -65,7 +65,7 @@ export class NguiAutoComplete {
     let replacementWord = matches[0];
     let url = this.source.replace(replacementWord, keyword);
 
-    return this.http.get(url, NguiAutoComplete.upgradeOptions())
+    return this.http.get(url)
       .map(resp => resp.json())
       .map(resp => {
         let list = resp.data || resp;
@@ -78,21 +78,5 @@ export class NguiAutoComplete {
         return list;
       });
   };
-
-    private static upgradeOptions(options?: RequestOptionsArgs): RequestOptionsArgs {
-        if (options == null) {
-            options = {
-                headers: new Headers()
-            };
-        }
-
-        if (options.headers == null) {
-            options.headers = new Headers();
-        }
-
-        options.headers.set('X-Requested-With', 'XMLHttpRequest');
-
-        return options;
-    }
 }
 
