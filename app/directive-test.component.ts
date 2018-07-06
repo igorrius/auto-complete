@@ -9,16 +9,18 @@ let templateStr: string = `
     
   <fieldset><legend><h2>Source as Array of Strings</h2></legend>
     <ngui-utils-1>
-      <div ngui-auto-complete 
+        <input ngui-auto-complete  
+        id="model1" 
+        [ngModel]="model1" 
+        autofocus
         [source]="arrayOfStrings"
         [accept-user-input]="true"
         [auto-select-first-item]="false"
         [select-on-blur]="true"
+        [component-id]="'autocompleter-for-the-reader'"
         (ngModelChange)="myCallback1($event)"
         (customSelected)="customCallback($event)"
-        placeholder="enter text">
-        <input id="model1" [ngModel]="model1" autofocus />
-      </div>
+        placeholder="enter text"/>
       <br/>selected model1: {{json(model1)}}<br/><br/>
     </ngui-utils-1>
     <pre>{{templateStr | htmlCode:'ngui-utils-1'}}</pre>
@@ -117,16 +119,16 @@ let templateStr: string = `
     
   <fieldset><legend><h2>With Material Design</h2></legend>
     <ngui-utils-6>
-      <md-input-container>
-        <span mdPrefix>$&nbsp;</span>
-        <input mdInput ngui-auto-complete style="border: 1px solid #ccc"
+      <mat-input-container>
+        <span matPrefix>$&nbsp;</span>
+        <input matInput ngui-auto-complete style="border: 1px solid #ccc"
           id="model6"
           [(ngModel)]="myModel"
           [source]="arrayOfNumbers"
           [list-formatter]="rightAligned"
           placeholder="amount" align="end"/>
-          <span mdSuffix>.00</span>
-      </md-input-container>
+          <span matSuffix>.00</span>
+      </mat-input-container>
     </ngui-utils-6>
     <pre>{{templateStr | htmlCode:'ngui-utils-6'}}</pre>
     <pre>arrayOfNumbers: {{json(arrayOfNumbers)}}</pre>

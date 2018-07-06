@@ -28,6 +28,7 @@ export declare class NguiAutoCompleteDirective implements OnInit, OnChanges {
     autoSelectFirstItem: boolean;
     openOnFocus: boolean;
     reFocusAfterSelect: boolean;
+    componentId: string;
     ngModel: String;
     formControlName: string;
     extFormControl: FormControl;
@@ -47,6 +48,7 @@ export declare class NguiAutoCompleteDirective implements OnInit, OnChanges {
     private scheduledBlurHandler;
     private documentClickListener;
     constructor(resolver: ComponentFactoryResolver, viewContainerRef: ViewContainerRef, parentForm: ControlContainer);
+    private static setAdditionalAttributes(el);
     ngOnInit(): void;
     ngAfterViewInit(): void;
     ngOnDestroy(): void;
@@ -59,6 +61,7 @@ export declare class NguiAutoCompleteDirective implements OnInit, OnChanges {
     selectNewValue: (item: any) => void;
     selectCustomValue: (text: string) => void;
     enterNewText: (value: any) => void;
+    setCurrentItemIndex: (itemIndex: number) => void;
     private keydownEventHandler;
     private inputEventHandler;
     private renderValue(item);

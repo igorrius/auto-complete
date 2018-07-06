@@ -28,9 +28,11 @@ export declare class NguiAutoCompleteComponent implements OnInit {
     matchFormatted: boolean;
     autoSelectFirstItem: boolean;
     selectOnBlur: boolean;
+    componentId: string;
     valueSelected: EventEmitter<{}>;
     customSelected: EventEmitter<{}>;
     textEntered: EventEmitter<{}>;
+    currentItemIndex: EventEmitter<number>;
     autoCompleteInput: ElementRef;
     autoCompleteContainer: ElementRef;
     el: HTMLElement;
