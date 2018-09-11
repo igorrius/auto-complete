@@ -30,7 +30,7 @@ import {NguiAutoComplete} from "./auto-complete";
 
             <!-- dropdown that user can select -->
             <ul *ngIf="dropdownVisible"
-                role="list"
+                role="listbox"
                 [class.empty]="emptyList"
                 [attr.aria-label]="placeholder">
                 <li *ngIf="isLoading && loadingTemplate" class="loading" [innerHTML]="loadingTemplate"></li>
@@ -44,7 +44,7 @@ import {NguiAutoComplete} from "./auto-complete";
                     class="blank-item">{{blankOptionText}}
                 </li>
                 <li class="item"
-                    role="listitem"
+                    role="option"
                     tabindex="-1"
                     *ngFor="let item of filteredList; let i=index"
                     (mousedown)="selectOne(item)"
